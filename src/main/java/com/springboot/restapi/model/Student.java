@@ -1,9 +1,6 @@
 package com.springboot.restapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,8 +10,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String address;
+    private String country;
     private int age;
+
+    @OneToOne(mappedBy = "student")
+    private Address address;
 
     private LocalDate created_at;
     private LocalDate updated_at;
@@ -23,10 +23,10 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long id, String name, String address, int age) {
+    public Student(Long id, String name, String country, int age) {
         this.id = id;
         this.name = name;
-        this.address = address;
+        this.country = country;
         this.age = age;
     }
 
@@ -38,12 +38,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCountry() {
+        return country;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getAge() {
@@ -83,7 +83,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                ", address='" + country + '\'' +
                 ", age=" + age +
                 '}';
     }
