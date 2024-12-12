@@ -1,7 +1,10 @@
 package com.springboot.restapi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "teacher_tbl")
@@ -18,6 +21,10 @@ public class Teacher {
     private String qualification;
     private String speciality;
 
+//    @JsonIgnore
+    @OneToMany(mappedBy = "classTeacher")
+    private List<Student> studentList;
+
     public Teacher() {
     }
 
@@ -28,6 +35,14 @@ public class Teacher {
         this.address = address;
         this.qualification = qualification;
         this.speciality = speciality;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 
     public String getEmail() {

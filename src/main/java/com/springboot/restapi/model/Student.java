@@ -1,8 +1,17 @@
 package com.springboot.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
+/*
+* oneToOne - student with seat in class
+* OneToMany - Student can take n number of books from library
+* ManyToOne - A book can be taken by only 1 student at a time.
+*
+* */
 
 @Entity
 public class Student {
@@ -16,8 +25,21 @@ public class Student {
     @OneToOne(mappedBy = "student")
     private Address address;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "class_teacher_id", nullable = false)
+    private Teacher classTeacher;
+
     private LocalDate created_at;
     private LocalDate updated_at;
+
+    @ManyToMany
+    @JoinTable(
+            name = "course_taken",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name="course_id")
+    )
+    private List<Course> courses;
 
 
     public Student() {
@@ -28,6 +50,30 @@ public class Student {
         this.name = name;
         this.country = country;
         this.age = age;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Teacher getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(Teacher classTeacher) {
+        this.classTeacher = classTeacher;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getName() {

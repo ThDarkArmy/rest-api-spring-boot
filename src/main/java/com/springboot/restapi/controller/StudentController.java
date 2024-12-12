@@ -1,5 +1,6 @@
 package com.springboot.restapi.controller;
 
+import com.springboot.restapi.dto.StudentDto;
 import com.springboot.restapi.model.Student;
 import com.springboot.restapi.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,8 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addStudent(@RequestBody Student student){
-        System.out.println("StudentData: "+student.toString());
-//        studentList.add(student);
-        return status(HttpStatus.OK).body(studentService.addStudent(student));
+    public ResponseEntity<?> addStudent(@RequestBody StudentDto studentDto){
+        return status(HttpStatus.OK).body(studentService.addStudent(studentDto));
     }
 
     @PutMapping("/update/{id}")
