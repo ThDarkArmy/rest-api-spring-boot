@@ -3,6 +3,7 @@ package com.springboot.restapi.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,15 +13,15 @@ public class Course {
     private Long courseId;
     private String subject;
     private String duration;
-    private LocalDate startDate;
+    private String startDate;
 
     @ManyToMany
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
 
-    public Course(Long courseId, String subject, String duration, LocalDate startDate) {
+    public Course(Long courseId, String subject, String duration, String startDate) {
         this.courseId = courseId;
         this.subject = subject;
         this.duration = duration;
@@ -59,11 +60,11 @@ public class Course {
         this.duration = duration;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

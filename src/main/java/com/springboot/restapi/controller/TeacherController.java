@@ -2,6 +2,7 @@ package com.springboot.restapi.controller;
 
 import com.springboot.restapi.model.Teacher;
 import com.springboot.restapi.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

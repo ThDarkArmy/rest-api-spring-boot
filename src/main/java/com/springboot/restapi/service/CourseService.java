@@ -1,6 +1,6 @@
 package com.springboot.restapi.service;
 
-import com.springboot.restapi.dto.TakeCourseDto;
+import com.springboot.restapi.dto.EnrollCourseDto;
 import com.springboot.restapi.model.Course;
 import com.springboot.restapi.model.Student;
 import com.springboot.restapi.repository.CourseRepository;
@@ -27,10 +27,13 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Course takeCourse(TakeCourseDto takeCourseDto) {
-        Student student = studentRepository.findById(takeCourseDto.getStudentId()).orElseThrow();
-        Course course = courseRepository.findById(takeCourseDto.getCourseId()).orElseThrow();
-        // TODO - save the taken courses
-        return null;
+    public Course enrollCourse(EnrollCourseDto enrollCourseDto) {
+        Student student = studentRepository.findById(enrollCourseDto.getStudentId()).orElseThrow(()-> new RuntimeException("Student not found"));
+        Course course = courseRepository.findById(enrollCourseDto.getCourseId()).orElseThrow(()-> new RuntimeException("Course not found"));
+        student.getCourses().add(course);
+        course.getStudents().add(student);
+        studentRepository.save(student);
+
+        return courseRepository.save(course);
     }
 }

@@ -1,11 +1,11 @@
 package com.springboot.restapi.dto;
 
 
-public class TakeCourseDto {
+public class EnrollCourseDto {
     private Long courseId;
     private Long studentId;
 
-    public TakeCourseDto() {
+    public EnrollCourseDto() {
     }
 
     public Long getCourseId() {

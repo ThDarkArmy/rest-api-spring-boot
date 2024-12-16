@@ -1,9 +1,19 @@
 package com.springboot.restapi.dto;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class StudentDto {
+    @NotBlank(message = "Name cannot be empty")
     private String name;
+    @NotBlank(message = "Country cannot be empty")
     private String country;
+    @NotNull(message = "Age must not be null")
+    @Max(value = 35, message = "Maximum age must be less than or equal to 35")
+    @Min(value = 4, message = "Minimum age must be greater than or equal to 4")
     private int age;
     private Long classTeacherId;
 

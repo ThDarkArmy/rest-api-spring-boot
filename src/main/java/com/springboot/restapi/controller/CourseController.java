@@ -1,6 +1,6 @@
 package com.springboot.restapi.controller;
 
-import com.springboot.restapi.dto.TakeCourseDto;
+import com.springboot.restapi.dto.EnrollCourseDto;
 import com.springboot.restapi.model.Course;
 import com.springboot.restapi.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class CourseController {
         return status(HttpStatus.CREATED).body(courseService.add(course));
     }
 
-    @PostMapping("/take-course")
-    public ResponseEntity<?> takeCourse(@RequestBody TakeCourseDto takeCourseDto){
-        return status(HttpStatus.CREATED).body(courseService.takeCourse(takeCourseDto));
+    @PostMapping("/enroll-course")
+    public ResponseEntity<?> enrollCourse(@RequestBody EnrollCourseDto enrollCourseDto){
+        return status(HttpStatus.CREATED).body(courseService.enrollCourse(enrollCourseDto));
     }
 }
